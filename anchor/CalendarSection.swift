@@ -110,6 +110,5 @@ struct CalendarSection: View {
 #Preview {
     CalendarSection(month: Date(), calendar: Calendar.current)
         .padding()
-        .previewLayout(.sizeThatFits)
         .preferredColorScheme(.dark)
 }
