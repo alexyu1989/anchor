@@ -102,31 +102,26 @@ private struct CheckInCard: View {
     let action: () -> Void
 
     var body: some View {
-
-        VStack {
-            HStack {
-                icon
+        Button(action: action) {
+            VStack {
+                HStack {
+                    icon
+                    Spacer()
+                }
                 Spacer()
+                HStack {
+                    Spacer()
+                    Text(item.title)
+                        .font(.headline)
+                        .multilineTextAlignment(.trailing)
+                        .foregroundStyle(.primary)
+                }
             }
-            Spacer()
-            HStack {
-                Spacer()
-                Text(item.title)
-                    .font(.headline)
-                    .multilineTextAlignment(.trailing)
-                    .foregroundStyle(.primary)
-            }
+            .padding(16)
+            .aspectRatio(1, contentMode: .fit)
         }
-        .padding(16)
-        .aspectRatio(1, contentMode: .fit)
-        .contentShape(
-            RoundedRectangle(cornerRadius: 34.0, style: .continuous)
-        )
-        .onTapGesture(perform: action)
-        .glassEffect(
-            .clear.interactive().tint(item.color.opacity(isCompleted ? 1.0 : 0.1)),
-            in: .rect(cornerRadius: 34.0)
-        )
+        .buttonStyle(isCompleted ? .glassProminent : .glass)
+        .tint(item.color.opacity(isCompleted ? 1.0 : 0.1))
     }
 
     @ViewBuilder
