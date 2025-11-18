@@ -5,6 +5,7 @@
 //  Created by Alex Yu on 2025/10/30.
 //
 
+import AudioToolbox
 import SwiftUI
 
 struct ContentView: View {
@@ -54,16 +55,41 @@ struct ContentView: View {
 
 private struct CheckInSection: View {
     let items: [CheckInItem]
+    @State private var completedIDs = Set<UUID>()
 
     private let columns = Array(repeating: GridItem(.flexible(), spacing: 16), count: 3)
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                Button("Run", systemImage: "figure.run") {
+                    //
+                }
+                .tint(.orange)
+                .buttonStyle(.glass)
+                Button("Run", systemImage: "figure.run") {
+                    //
+                }
+                .tint(.orange)
+                .buttonStyle(.glassProminent)
+                
+            }
             Text("打卡项目")
                 .font(.title3.bold())
             LazyVGrid(columns: columns, spacing: 16) {
                 ForEach(items) { item in
-                    CheckInCard(item: item)
+                    CheckInCard(
+                        item: item,
+                        isCompleted: completedIDs.contains(item.id)
+                    ) {
+                        let currentlyCompleted = completedIDs.contains(item.id)
+                        if currentlyCompleted {
+                            completedIDs.remove(item.id)
+                        } else {
+                            completedIDs.insert(item.id)
+                        }
+                        AudioServicesPlaySystemSound(currentlyCompleted ? 1505 : 1504)
+                    }
                 }
             }
         }
@@ -72,28 +98,35 @@ private struct CheckInSection: View {
 
 private struct CheckInCard: View {
     let item: CheckInItem
+    let isCompleted: Bool
+    let action: () -> Void
 
     var body: some View {
 
-        Group {
-            VStack {
-                HStack {
-                    icon
-                    Spacer()
-                }
+        VStack {
+            HStack {
+                icon
                 Spacer()
-                HStack {
-                    Spacer()
-                    Text(item.title)
-                        .font(.headline)
-                        .multilineTextAlignment(.trailing)
-                        .foregroundStyle(.primary)
-                }
             }
-            .padding(16)
+            Spacer()
+            HStack {
+                Spacer()
+                Text(item.title)
+                    .font(.headline)
+                    .multilineTextAlignment(.trailing)
+                    .foregroundStyle(.primary)
+            }
         }
+        .padding(16)
         .aspectRatio(1, contentMode: .fit)
-        .glassEffect(.clear.interactive().tint(item.color.opacity(0.1)), in: .rect(cornerRadius: 32, style: .continuous))
+        .contentShape(
+            RoundedRectangle(cornerRadius: 34.0, style: .continuous)
+        )
+        .onTapGesture(perform: action)
+        .glassEffect(
+            .clear.interactive().tint(item.color.opacity(isCompleted ? 1.0 : 0.1)),
+            in: .rect(cornerRadius: 34.0)
+        )
     }
 
     @ViewBuilder
