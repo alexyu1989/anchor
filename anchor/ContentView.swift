@@ -102,6 +102,16 @@ private struct CheckInCard: View {
     let action: () -> Void
 
     var body: some View {
+        if isCompleted {
+            baseButton
+                .buttonStyle(.glassProminent)
+        } else {
+            baseButton
+                .buttonStyle(.glass)
+        }
+    }
+
+    private var baseButton: some View {
         Button(action: action) {
             Label {
                 Text(item.title)
@@ -110,7 +120,6 @@ private struct CheckInCard: View {
                 icon
             }
         }
-        .buttonStyle(isCompleted ? .glassProminent : .glass)
         .tint(item.color.opacity(isCompleted ? 1.0 : 0.1))
     }
 
