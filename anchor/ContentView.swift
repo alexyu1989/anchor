@@ -103,22 +103,12 @@ private struct CheckInCard: View {
 
     var body: some View {
         Button(action: action) {
-            VStack {
-                HStack {
-                    icon
-                    Spacer()
-                }
-                Spacer()
-                HStack {
-                    Spacer()
-                    Text(item.title)
-                        .font(.headline)
-                        .multilineTextAlignment(.trailing)
-                        .foregroundStyle(.primary)
-                }
+            Label {
+                Text(item.title)
+                    .font(.headline)
+            } icon: {
+                icon
             }
-            .padding(16)
-            .aspectRatio(1, contentMode: .fit)
         }
         .buttonStyle(isCompleted ? .glassProminent : .glass)
         .tint(item.color.opacity(isCompleted ? 1.0 : 0.1))
