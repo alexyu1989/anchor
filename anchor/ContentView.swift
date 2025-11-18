@@ -112,30 +112,8 @@ private struct CheckInCard: View {
     }
 
     private var baseButton: some View {
-        Button(action: action) {
-            Label {
-                Text(item.title)
-                    .font(.headline)
-            } icon: {
-                icon
-            }
-        }
-        .tint(item.color.opacity(isCompleted ? 1.0 : 0.1))
-    }
-
-    @ViewBuilder
-    private var icon: some View {
-        switch item.icon {
-        case .emoji(let value):
-            Text(value)
-                .font(.system(size: 32))
-                .foregroundStyle(.primary)
-        case .symbol(let name):
-            Image(systemName: name)
-                .symbolRenderingMode(.hierarchical)
-                .foregroundStyle(.primary)
-                .font(.system(size: 30))
-        }
+        Button(item.title, systemImage: item.icon, action: action)
+            .tint(item.color)
     }
 }
 
