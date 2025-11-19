@@ -118,18 +118,7 @@ private struct CheckInCard: View {
     let action: () -> Void
 
     var body: some View {
-        if isCompleted {
-            baseButton
-                .buttonStyle(.glassProminent)
-        } else {
-            baseButton
-                .buttonStyle(.glass)
-        }
-    }
-
-    private var baseButton: some View {
-        Button(item.title, systemImage: item.icon, action: action)
-            .tint(item.color)
+        
     }
 }
 
