@@ -1,0 +1,171 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "home.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Today's Check-Ins" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "今日打卡" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "今日打卡" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "今日のチェックイン" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "오늘의 체크인" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Pointages du jour" } }
+      }
+    },
+    "action.run" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Run" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "开始" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "開始" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "実行" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "실행" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Lancer" } }
+      }
+    },
+    "section.checkIns" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Check-In Items" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "打卡项目" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "打卡項目" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "チェックイン項目" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "체크인 항목" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Éléments de pointage" } }
+      }
+    },
+    "placeholder.addComingSoon" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add check-in items coming soon" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "添加打卡项目功能即将上线" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "新增打卡項目功能即將推出" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "新しいチェックイン項目の追加はまもなく登場します" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "새 체크인 항목 추가 기능이 곧 제공됩니다" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "L'ajout de nouveaux pointages arrive bientôt" } }
+      }
+    },
+    "placeholder.addDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You'll be able to create new check-ins here later." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "稍后即可在此创建新的打卡项目。" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "稍後即可在此建立新的打卡項目。" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "まもなくここで新しいチェックインを作成できるようになります。" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "곧 이곳에서 새로운 체크인을 만들 수 있습니다." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Vous pourrez bientôt créer de nouveaux pointages ici." } }
+      }
+    },
+    "settings.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Settings" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "设置" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "設定" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "設定" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "설정" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Réglages" } }
+      }
+    },
+    "settings.description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Configuration options for your check-ins will appear here." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "这里将提供打卡相关的设置选项。" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "這裡將提供打卡相關的設定選項。" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "チェックインに関する設定項目がここに表示されます。" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "체크인 설정 옵션이 여기에 표시됩니다." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Les options de configuration de vos pointages apparaîtront ici." } }
+      }
+    },
+    "checkin.item.fatBurn" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Fat Burn" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "燃脂" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "燃脂" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "脂肪燃焼" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "지방 연소" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Brûle-graisse" } }
+      }
+    },
+    "checkin.item.walking" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Walking" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "步行" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "步行" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ウォーキング" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "걷기" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Marche" } }
+      }
+    },
+    "checkin.item.reading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reading" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "阅读" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "閱讀" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "読書" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "독서" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Lecture" } }
+      }
+    },
+    "checkin.item.lightsOut" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Lights Out" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "晚安" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "晚安" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "就寝" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "취침" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Extinction des feux" } }
+      }
+    },
+    "checkin.item.hydrate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Hydrate" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "喝水" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "喝水" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "水分補給" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "수분 섭취" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Hydratation" } }
+      }
+    },
+    "checkin.item.heartFocus" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Heart Focus" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "心动" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "心動" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ハートフォーカス" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "하트 포커스" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Focus cardiaque" } }
+      }
+    },
+    "checkin.item.meditation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Meditation" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "冥想" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "冥想" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "瞑想" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "명상" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Méditation" } }
+      }
+    },
+    "checkin.item.nature" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Nature Time" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "自然" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "自然" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "自然タイム" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "자연 시간" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Moment nature" } }
+      }
+    }
+  },
+  "version" : "1.1"
+}

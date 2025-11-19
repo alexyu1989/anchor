@@ -6,9 +6,19 @@ struct SettingsView: View {
             Image(systemName: "gearshape.fill")
                 .font(.system(size: 48))
                 .foregroundStyle(.secondary)
-            Text("设置页面")
+            Text(
+                String(
+                    localized: "settings.title",
+                    defaultValue: "Settings"
+                )
+            )
                 .font(.title3)
-            Text("这里将配置打卡相关选项。")
+            Text(
+                String(
+                    localized: "settings.description",
+                    defaultValue: "Configuration options for your check-ins will appear here."
+                )
+            )
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
         }

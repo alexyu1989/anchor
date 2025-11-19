@@ -28,7 +28,12 @@ struct ContentView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
-            .navigationTitle("今日打卡")
+            .navigationTitle(
+                String(
+                    localized: "home.title",
+                    defaultValue: "Today's Check-Ins"
+                )
+            )
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
@@ -62,19 +67,30 @@ private struct CheckInSection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
-                Button("Run", systemImage: "figure.run") {
+                Button(
+                    String(localized: "action.run", defaultValue: "Run"),
+                    systemImage: "figure.run"
+                ) {
                     //
                 }
                 .tint(.orange)
                 .buttonStyle(.glass)
-                Button("Run", systemImage: "figure.run") {
+                Button(
+                    String(localized: "action.run", defaultValue: "Run"),
+                    systemImage: "figure.run"
+                ) {
                     //
                 }
                 .tint(.orange)
                 .buttonStyle(.glassProminent)
                 
             }
-            Text("打卡项目")
+            Text(
+                String(
+                    localized: "section.checkIns",
+                    defaultValue: "Check-In Items"
+                )
+            )
                 .font(.title3.bold())
             LazyVGrid(columns: columns, spacing: 16) {
                 ForEach(items) { item in
@@ -124,9 +140,19 @@ private struct AddPlaceholderView: View {
             Image(systemName: "plus.circle")
                 .font(.system(size: 48))
                 .foregroundStyle(.secondary)
-            Text("添加打卡项目即将上线")
+            Text(
+                String(
+                    localized: "placeholder.addComingSoon",
+                    defaultValue: "Add check-in items coming soon"
+                )
+            )
                 .font(.headline)
-            Text("这里之后会提供创建新打卡项目的界面。")
+            Text(
+                String(
+                    localized: "placeholder.addDescription",
+                    defaultValue: "You'll be able to create new check-ins here later."
+                )
+            )
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
         }
