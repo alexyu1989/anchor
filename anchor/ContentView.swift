@@ -63,35 +63,17 @@ private struct CheckInSection: View {
     @State private var completedIDs = Set<UUID>()
 
     private let columns = Array(repeating: GridItem(.flexible(), spacing: 16), count: 3)
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                Button(
-                    String(localized: "action.run", defaultValue: "Run"),
-                    systemImage: "figure.run"
-                ) {
-                    //
-                }
-                .tint(.orange)
-                .buttonStyle(.glass)
-                Button(
-                    String(localized: "action.run", defaultValue: "Run"),
-                    systemImage: "figure.run"
-                ) {
-                    //
-                }
-                .tint(.orange)
-                .buttonStyle(.glassProminent)
-                
-            }
             Text(
                 String(
                     localized: "section.checkIns",
                     defaultValue: "Check-In Items"
                 )
             )
-                .font(.title3.bold())
+            .font(.title3.bold())
+            
             LazyVGrid(columns: columns, spacing: 16) {
                 ForEach(items) { item in
                     CheckInCard(
@@ -118,7 +100,31 @@ private struct CheckInCard: View {
     let action: () -> Void
 
     var body: some View {
-        
+
+        VStack {
+            HStack {
+                Image(systemName: item.icon)
+                Spacer()
+            }
+            Spacer()
+            HStack {
+                Text(item.title)
+                    .font(.body)
+                    .multilineTextAlignment(.leading)
+                    .foregroundStyle(.primary)
+                Spacer()
+            }
+        }
+        .padding(16)
+        .aspectRatio(1, contentMode: .fit)
+        .contentShape(
+            RoundedRectangle(cornerRadius: 34.0, style: .continuous)
+        )
+        .onTapGesture(perform: action)
+        .glassEffect(
+            .clear.interactive().tint(item.color.opacity(isCompleted ? 1.0 : 0.1)),
+            in: .rect(cornerRadius: 34.0)
+        )
     }
 }
 
