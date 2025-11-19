@@ -155,7 +155,12 @@ private struct AddPlaceholderView: View {
     }
 }
 
-#Preview {
+#Preview("Light") {
+    ContentView()
+        .preferredColorScheme(.light)
+}
+
+#Preview("Dark") {
     ContentView()
         .preferredColorScheme(.dark)
 }
@@ -165,9 +170,14 @@ private struct TextureBackground: View {
 
     var body: some View {
         GeometryReader { proxy in
+            let size = proxy.size
+            let maxDimension = max(size.width, size.height)
             let gradientColors = colorScheme == .dark
                 ? [Color(red: 0.06, green: 0.08, blue: 0.16), Color(red: 0.02, green: 0.03, blue: 0.1)]
-                : [Color(red: 0.96, green: 0.93, blue: 0.98), Color(red: 0.74, green: 0.77, blue: 0.92)]
+                : [Color(red: 0.95, green: 0.95, blue: 0.99), Color(red: 0.78, green: 0.81, blue: 0.92)]
+            let noiseBaseColor = colorScheme == .dark ? Color.white : Color.black
+            let noiseBlendMode: BlendMode = colorScheme == .dark ? .screen : .multiply
+            let noiseOpacity: Double = colorScheme == .dark ? 0.45 : 0.35
 
             ZStack {
                 LinearGradient(
@@ -179,28 +189,37 @@ private struct TextureBackground: View {
                     gradient: Gradient(colors: [Color.purple.opacity(0.25), .clear]),
                     center: .init(x: 0.2, y: 0.15),
                     startRadius: 40,
-                    endRadius: max(proxy.size.width, proxy.size.height) * 0.7
+                    endRadius: maxDimension * 0.8
                 )
                 RadialGradient(
-                    gradient: Gradient(colors: [Color.blue.opacity(0.2), .clear]),
-                    center: .init(x: 0.8, y: 0.7),
-                    startRadius: 20,
-                    endRadius: max(proxy.size.width, proxy.size.height) * 0.6
+                    gradient: Gradient(colors: [Color.blue.opacity(0.25), .clear]),
+                    center: .init(x: 0.85, y: 0.65),
+                    startRadius: 30,
+                    endRadius: maxDimension * 0.7
                 )
-                Canvas { context, _ in
-                    let step: CGFloat = 24
-                    for x in stride(from: 0, to: proxy.size.width, by: step) {
-                        for y in stride(from: 0, to: proxy.size.height, by: step) {
+                Canvas { context, size in
+                    let step: CGFloat = 22
+                    for x in stride(from: -step, through: size.width + step, by: step) {
+                        for y in stride(from: -step, through: size.height + step, by: step) {
                             var rect = CGRect(x: x, y: y, width: step, height: step)
                             rect = rect.insetBy(dx: 1, dy: 1)
-                            let noise = Double((x + y).truncatingRemainder(dividingBy: step * 3)) / (step * 3)
-                            context.fill(Path(rect), with: .color(Color.white.opacity(0.02 + noise * 0.03)))
+                            let seed = sin((Double(x) * 12.9898 + Double(y) * 78.233) * 43758.5453)
+                            let noise = seed - floor(seed)
+                            context.fill(
+                                Path(rect),
+                                with: .color(
+                                    noiseBaseColor.opacity(
+                                        (colorScheme == .dark ? 0.02 : 0.04) + noise * (colorScheme == .dark ? 0.03 : 0.05)
+                                    )
+                                )
+                            )
                         }
                     }
                 }
-                .blendMode(.screen)
-                .opacity(0.45)
+                .blendMode(noiseBlendMode)
+                .opacity(noiseOpacity)
             }
+            .frame(width: size.width * 2, height: size.height * 2)
             .ignoresSafeArea()
         }
     }
