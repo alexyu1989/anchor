@@ -5,6 +5,7 @@
 //  Created by Alex Yu on 2025/10/30.
 //
 
+import SwiftData
 import SwiftUI
 
 @main
@@ -13,5 +14,6 @@ struct anchorApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: CheckInItem.self)
     }
 }
