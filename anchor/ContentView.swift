@@ -109,14 +109,16 @@ private struct CheckInCard: View {
         VStack(alignment: .trailing) {
             HStack {
                 Image(systemName: item.icon)
-                    .font(.title3)
+                    .font(.title2)
                 Spacer()
             }
             Spacer()
             Text(item.title)
-                .font(.title3)
+                .font(.headline)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.trailing)
+                .lineLimit(3)
+                .minimumScaleFactor(0.6)
         }
         .foregroundStyle(isCompleted ? Color(uiColor: .systemBackground) : .primary)
         .padding(16)
