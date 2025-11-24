@@ -12,8 +12,30 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var showAddSheet = false
+    @State private var persistenceError: String?
     @Query(sort: [SortDescriptor(\CheckInItem.createdAt, order: .forward)])
     private var items: [CheckInItem]
+    @Query private var todayRecords: [CheckInRecord]
+    private let today: Date
+
+    init() {
+        let normalizedToday = CheckInItem.normalizedDay(for: .now)
+        self.today = normalizedToday
+        _todayRecords = Query(
+            filter: #Predicate { record in
+                record.date == normalizedToday
+            }
+        )
+    }
+
+    private var completionLookup: [PersistentIdentifier: CheckInRecord] {
+        var mapping: [PersistentIdentifier: CheckInRecord] = [:]
+        for record in todayRecords {
+            guard let identifier = record.item?.persistentModelID else { continue }
+            mapping[identifier] = record
+        }
+        return mapping
+    }
 
     var body: some View {
         NavigationStack {
@@ -25,7 +47,11 @@ struct ContentView: View {
                                 showAddSheet = true
                             }
                         } else {
-                            CheckInSection(items: items)
+                            CheckInSection(
+                                items: items,
+                                completedRecords: completionLookup,
+                                toggleAction: toggleCheckIn
+                            )
                         }
                     }
                     .padding(.horizontal, 20)
@@ -61,15 +87,69 @@ struct ContentView: View {
                 .environment(\.modelContext, modelContext)
                 .presentationDetents([.large])
         }
+        .alert(
+            String(
+                localized: "error.storageFailure",
+                defaultValue: "Unable to update check-in"
+            ),
+            isPresented: Binding(
+                get: { persistenceError != nil },
+                set: { isPresented in
+                    if !isPresented {
+                        persistenceError = nil
+                    }
+                }
+            )
+        ) {
+            Button(
+                String(
+                    localized: "action.ok",
+                    defaultValue: "OK"
+                ),
+                role: .cancel
+            ) {
+                persistenceError = nil
+            }
+        } message: {
+            Text(persistenceError ?? "")
+        }
+    }
+
+    private func toggleCheckIn(for item: CheckInItem) {
+        let itemID = item.persistentModelID
+        let existingRecord = completionLookup[itemID]
+
+        if let record = existingRecord {
+            if record.isCompleted {
+                modelContext.delete(record)
+            } else {
+                record.count = item.targetCount
+                record.item = item
+            }
+        } else {
+            let newRecord = CheckInRecord(
+                date: today,
+                count: item.targetCount,
+                item: item
+            )
+            modelContext.insert(newRecord)
+        }
+
+        do {
+            try modelContext.save()
+        } catch {
+            persistenceError = error.localizedDescription
+        }
     }
 }
 
 private struct CheckInSection: View {
     let items: [CheckInItem]
-    @State private var completedIDs = Set<PersistentIdentifier>()
+    let completedRecords: [PersistentIdentifier: CheckInRecord]
+    let toggleAction: (CheckInItem) -> Void
 
     private let columns = Array(repeating: GridItem(.flexible(), spacing: 16), count: 3)
-    
+ 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
 //            Text(
@@ -83,17 +163,14 @@ private struct CheckInSection: View {
             LazyVGrid(columns: columns, spacing: 16) {
                 ForEach(items) { item in
                     let identifier = item.id
+                    let record = completedRecords[identifier]
+                    let wasCompleted = record?.isCompleted ?? false
                     CheckInCard(
                         item: item,
-                        isCompleted: completedIDs.contains(identifier)
+                        isCompleted: record?.isCompleted ?? false
                     ) {
-                        let currentlyCompleted = completedIDs.contains(identifier)
-                        if currentlyCompleted {
-                            completedIDs.remove(identifier)
-                        } else {
-                            completedIDs.insert(identifier)
-                        }
-                        AudioServicesPlaySystemSound(currentlyCompleted ? 1505 : 1504)
+                        toggleAction(item)
+                        AudioServicesPlaySystemSound(wasCompleted ? 1505 : 1504)
                     }
                 }
             }
@@ -107,32 +184,34 @@ private struct CheckInCard: View {
     let action: () -> Void
 
     var body: some View {
-
-        VStack(alignment: .trailing) {
-            HStack {
-                Image(systemName: item.icon)
-                    .font(.title2)
+        Button(action: action) {
+            VStack(alignment: .trailing) {
+                HStack {
+                    Image(systemName: item.icon)
+                        .font(.title2)
+                    Spacer()
+                }
                 Spacer()
+                Text(item.title)
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.trailing)
+                    .lineLimit(3)
+                    .minimumScaleFactor(0.6)
             }
-            Spacer()
-            Text(item.title)
-                .font(.headline)
-                .fontWeight(.bold)
-                .multilineTextAlignment(.trailing)
-                .lineLimit(3)
-                .minimumScaleFactor(0.6)
+            .foregroundStyle(isCompleted ? Color(uiColor: .systemBackground) : .primary)
+            .padding(16)
+            .frame(maxWidth: .infinity)
+            .aspectRatio(1, contentMode: .fit)
+            .contentShape(RoundedRectangle(cornerRadius: 34.0, style: .continuous))
+            .glassEffect(
+                .regular
+                    .interactive()
+                    .tint(.primary.opacity(isCompleted ? 1.0 : 0.0)),
+                in: .rect(cornerRadius: 34.0)
+            )
         }
-        .foregroundStyle(isCompleted ? Color(uiColor: .systemBackground) : .primary)
-        .padding(16)
-        .aspectRatio(1, contentMode: .fit)
-        .onTapGesture(perform: action)
-        .glassEffect(
-            .regular
-            .interactive()
-            .tint(.primary.opacity(isCompleted ? 1.0 : 0.0))
-            ,
-            in: .rect(cornerRadius: 34.0)
-        )
+        .buttonStyle(.plain)
     }
 }
 
