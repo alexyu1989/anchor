@@ -181,8 +181,10 @@ private struct AddCheckInView: View {
     @FocusState private var nameFieldFocused: Bool
 
     @State private var name = ""
+    @State private var category: CheckInCategory = .wellness
     @State private var icon = CheckInItem.iconSuggestions.first ?? "flame.fill"
     @State private var selectedColor: CheckInColor = .ember
+    @State private var targetCount: Int = 1
     @State private var saveError: String?
 
     private var trimmedName: String {
@@ -216,6 +218,26 @@ private struct AddCheckInView: View {
 
                 Section(
                     String(
+                        localized: "addCheckIn.category",
+                        defaultValue: "Category"
+                    )
+                ) {
+                    Picker(
+                        String(
+                            localized: "addCheckIn.categoryPlaceholder",
+                            defaultValue: "Choose a category"
+                        ),
+                        selection: $category
+                    ) {
+                        ForEach(CheckInCategory.allCases) { category in
+                            Text(category.displayName).tag(category)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                }
+
+                Section(
+                    String(
                         localized: "addCheckIn.icon",
                         defaultValue: "Symbol"
                     )
@@ -242,6 +264,17 @@ private struct AddCheckInView: View {
                 ) {
                     ColorPickerGrid(selectedColor: $selectedColor)
                         .padding(.vertical, 4)
+                }
+
+                Section(
+                    String(
+                        localized: "addCheckIn.targetCount",
+                        defaultValue: "Daily Target"
+                    )
+                ) {
+                    Stepper(value: $targetCount, in: 1...20) {
+                        Text("\(targetCount) times per day")
+                    }
                 }
             }
             .navigationTitle(
@@ -315,8 +348,10 @@ private struct AddCheckInView: View {
         let sanitizedIcon = icon.trimmingCharacters(in: .whitespacesAndNewlines)
         let item = CheckInItem(
             title: trimmedName,
+            category: category,
             icon: sanitizedIcon.isEmpty ? "star" : sanitizedIcon,
-            color: selectedColor
+            color: selectedColor,
+            targetCount: targetCount
         )
 
         modelContext.insert(item)
@@ -435,7 +470,7 @@ private struct ColorPickerGrid: View {
 private let previewContainer: ModelContainer = {
     do {
         let container = try ModelContainer(
-            for: CheckInItem.self,
+            for: [CheckInItem.self, CheckInRecord.self],
             configurations: ModelConfiguration(isStoredInMemoryOnly: true)
         )
         CheckInItem.previewItems.forEach { container.mainContext.insert($0) }

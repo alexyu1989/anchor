@@ -14,6 +14,6 @@ struct anchorApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: CheckInItem.self)
+        .modelContainer(for: [CheckInItem.self, CheckInRecord.self])
     }
 }
