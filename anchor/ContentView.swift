@@ -10,6 +10,7 @@ import SwiftData
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var modelContext
     @State private var showAddSheet = false
     @Query(sort: [SortDescriptor(\CheckInItem.createdAt, order: .forward)])
     private var items: [CheckInItem]
@@ -57,6 +58,7 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showAddSheet) {
             AddCheckInView()
+                .environment(\.modelContext, modelContext)
                 .presentationDetents([.large])
         }
     }
@@ -472,7 +474,8 @@ private struct ColorPickerGrid: View {
 private let previewContainer: ModelContainer = {
     do {
         let container = try ModelContainer(
-            for: [CheckInItem.self, CheckInRecord.self],
+            for: CheckInItem.self,
+            CheckInRecord.self,
             configurations: ModelConfiguration(isStoredInMemoryOnly: true)
         )
         CheckInItem.previewItems.forEach { container.mainContext.insert($0) }

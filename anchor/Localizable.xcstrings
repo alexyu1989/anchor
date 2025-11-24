@@ -7,6 +7,9 @@
     "%lld" : {
 
     },
+    "%lld times per day" : {
+
+    },
     "action.cancel" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
@@ -81,6 +84,28 @@
         }
       }
     },
+    "addCheckIn.category" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Category"
+          }
+        }
+      }
+    },
+    "addCheckIn.categoryPlaceholder" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose a category"
+          }
+        }
+      }
+    },
     "addCheckIn.color" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
@@ -147,6 +172,17 @@
         }
       }
     },
+    "addCheckIn.targetCount" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Daily Target"
+          }
+        }
+      }
+    },
     "addCheckIn.title" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
@@ -154,6 +190,116 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Add Check-In"
+          }
+        }
+      }
+    },
+    "category.chores" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Chores"
+          }
+        }
+      }
+    },
+    "category.finance" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Finance"
+          }
+        }
+      }
+    },
+    "category.fitness" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Fitness"
+          }
+        }
+      }
+    },
+    "category.learning" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Learning"
+          }
+        }
+      }
+    },
+    "category.mindfulness" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Mindfulness"
+          }
+        }
+      }
+    },
+    "category.nutrition" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Nutrition"
+          }
+        }
+      }
+    },
+    "category.productivity" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Productivity"
+          }
+        }
+      }
+    },
+    "category.sleep" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Sleep"
+          }
+        }
+      }
+    },
+    "category.social" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Social"
+          }
+        }
+      }
+    },
+    "category.wellness" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Wellness"
           }
         }
       }
